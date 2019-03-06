@@ -308,10 +308,27 @@ void RotationFunction::ThereDimensionalReconstruction(){
     markRotateCenter(leftRotateCenter);
 
     renderWindow->Render();
-    renderWindowInteractor->Start();
+
     putPicturesInPdfFile();
+    renderWindowInteractor->Start();
 
 
+}
+
+void RotationFunction::putPicturesInPdfFile(){
+    changeCameraFieldOfView(20, 180);
+    savePngPictures("1");
+    changeCameraFieldOfView(18, 10);
+    savePngPictures("2");
+    changeCameraFieldOfView(70, 70);
+    savePngPictures("3");
+
+    std::cout<<"Here is save PDF file function"<<endl;
+}
+
+void RotationFunction::changeCameraFieldOfView(double AzimuthDegree, double ElevationDegree){
+    Renderer->GetActiveCamera()->Elevation(ElevationDegree);
+    Renderer->GetActiveCamera()->Azimuth(AzimuthDegree);
 }
 
 void RotationFunction::savePngPictures(std::string pngSaveName){
@@ -334,34 +351,6 @@ void RotationFunction::show(){
     ThereDimensionalReconstruction();
 //    savePNGPictures();
     return;
-}
-
-void RotationFunction::changeCameraFieldOfView(double AzimuthDegree, double ElevationDegree){
-    renderWindow->Render();
-    Renderer->GetActiveCamera()->Elevation(ElevationDegree);
-    renderWindow->Render();
-    Renderer->GetActiveCamera()->Azimuth(AzimuthDegree);
-
-}
-
-void RotationFunction::putPicturesInPdfFile(){
-    changeCameraFieldOfView(0, 90);
-    savePngPictures("1");
-    changeCameraFieldOfView(45, 0);
-    savePngPictures("2");
-    changeCameraFieldOfView(45, 0);
-    savePngPictures("3");
-    changeCameraFieldOfView(45, 0);
-    savePngPictures("4");
-    changeCameraFieldOfView(45, 0);
-    savePngPictures("5");
-    changeCameraFieldOfView(45, 0);
-    savePngPictures("6");
-    changeCameraFieldOfView(45, 0);
-    savePngPictures("7");
-
-    std::cout<<"Here is save PDF file function"<<endl;
-
 }
 
 void RotationFunction::orienntationMarkerWidget(){
